@@ -1,0 +1,75 @@
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys:                                                                                 
+FCC: imap://swolak@.example.com/Sent
+X-Identity-Key: id1
+X-Account-Key: account1
+From: Steven Wolak <swolak@example.com>
+Message-ID: <cf6d06a4-e0a7-91cc-e6b0-bf253b8358a9@example.com>
+Date: Wed, 20 Feb 2019 15:17:24 -0600
+X-Mozilla-Draft-Info: internal/draft; vcard=0; receipt=0; DSN=0; uuencode=0;
+ attachmentreminder=0; deliveryformat=4
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101
+ Thunderbird/60.4.0
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+ boundary="------------0B4D5D71514BEF3C0FFBDE03"
+Content-Language: en-US
+
+This is a multi-part message in MIME format.
+--------------0B4D5D71514BEF3C0FFBDE03
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <p><br>
+    </p>
+  </body>
+</html>
+
+--------------0B4D5D71514BEF3C0FFBDE03
+Content-Type: image/png;
+ name="avatar.png"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="avatar.png"
+
+iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1B
+AACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAM3SURBVGhD7ZlZyE5bGIB/U4jMJ9MN
+qRPJjRtDTpLpAndHSYlMZUiUZCYlF4biQiFJGaIonZCEpCNluBHlxpDxSIaLQ5mfZ9W6wf99
+3977Z231PfVcvKu91/fuYa39rvU11Knze9ECh+F83Iy7cAcuQ9tLTwdcj8/wSwWvYB8sJYPx
+PproZ7yBu3EdzsGFuB0fosf8h9twAJaG/vgaTfAMDsTGaI2nMD6dT+jFJqcZXkWTOojNsRqO
+IZ/EanyHnrsYkzIGTcRx0cmGjIxFz/8fu9mQCt97E9kQonycRftwLCXjJprE0BDlw2naPpym
+k/EcTaJLiPIxCu3jQogS8RFNwgGclxFoH5dClIi3aBKtQpSPkWgfF0OUiHtoEr1DlI+paB9H
+QpSIy2gSQ0KUD2c8+ygy8xVmJ5rEvBDlw0FuH+NDlIiZaBL7QpQdSxa/7k4aFp3JWIVeyK0Q
+ZScOdC+mhw2peIEmYvWbB2u1PWgfLgGSYY1kEkVei+VoH1tClAjnfpOYFKJ8nEb7mBKiRMQ6
+6SmusSEDnfEcuhB7iXmq5ybDL3qcgrMO+DjQvQkTbCgDFo+u9rqGqDZcWHkhm0JUEg6hSS0J
+UXWcre6g54y2oSyYjEm5qeC7X43p6PF3sZbl8S/lJJqcOyhtbGgEx8Yb9FgLxtLRHeNmQkcb
+GsG6zGP+QV+xUpLlQvaGqKSYoLYN0Y+ZjR7j9lEpcblrgk7DlfAL7nFJF1KVmIEm6KqxEsPR
+4/wQJq14v8UZaiO+RxOchdU4jx77AJN/1XviWnyCJmXNVGu99QfGrVb9F33limxiZMZX4zDG
+J6DX0e9DFlwdujCLG+DqTfHm/NRXbhy69xR/9AMeQzfYitAeF+BtjH07jbsdW2R35jv6ouV2
+/JFHaMHXC5uav/AAepPiBa3EllgIO3atYKfOMouwUvnRVPTD/ei487ctf9phLgZhfH+dZRyg
+v5qJ+ArN4QRm3pq1IrX4swMfdZG93aL8iXGzfK4NWfgbPdFZxMGYmmloPo8x0009jp64NUTp
+caqOpX+mhVj899Uv9uSSeA3NaQXWhLNSnC3KaM3lv9syR0vsUqxTp07NNDR8BciTJGl2qRtJ
+AAAAAElFTkSuQmCC
+--------------0B4D5D71514BEF3C0FFBDE03
+Content-Type: application/octet-stream;
+ name="rsmf.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="rsmf.zip"
+
+UEsDBBQAAAAIACV1VE6h6voM0QAAAHwCAAASAAAAcnNtZl9tYW5pZmVzdC5qc29unVGxCsIw
+EN0F/6Fk1pJYunQTd3EQF3E42ihB04bkKBTpv5vUSGprRbwp3Hvv8t7dfT6LbJGaayOqkmQR
+YTGNKVl4QIFGkQsFJRqLHm3bVycNRUTRqb0y9Ath1A0aB+7CsGgLko+4UAOCdtT1gZEAts/n
+6eUqr0rnGNB6Htqa/n5jzf1o2krwXGnpUHNt1Ngqumbm5mueYx/+vrdA6Qfs0k3n5TX/e/89
+J58JKCQ3CFI5eEVZsqRsyeiepVmaZJRORrcyA5e31Yyu43iDS/qs7QNQSwECPwAUAAAACAAl
+dVROoer6DNEAAAB8AgAAEgAkAAAAAAAAACAAAAAAAAAAcnNtZl9tYW5pZmVzdC5qc29uCgAg
+AAAAAAABABgAAj3Im1zJ1AEPssibXMnUAVpfE4hcydQBUEsFBgAAAAABAAEAZAAAAAEBAAAA
+AA==
+--------------0B4D5D71514BEF3C0FFBDE03--

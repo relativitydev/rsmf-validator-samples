@@ -1,0 +1,526 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://relativity.com/RSMF/1.0.0/schema.json",
+  "type": "object",
+  "title": "The 1.0.0 version of the schema for the RSMF manifest file",
+  "required": [
+    "version",
+    "participants",
+    "conversations",
+    "events"
+  ],
+  "properties": {
+    "version": {
+      "$id": "#/properties/version",
+      "type": "string",
+      "minLength": 5,
+      "title": "RSMF version",
+      "description": "The version of the RSMF specification that the file adheres to.",
+      "default": "1.0.0",
+      "examples": [
+        "1.0.0"
+      ]
+    },
+    "participants": {
+      "$id": "#/properties/participants",
+      "type": "array",
+      "title": "Participants",
+      "description": "An array of participants.",
+      "items": {
+        "$id": "#/properties/participants/items",
+		    "title": "Participant",
+		    "description": "A participant is someone who has participated in at least one of the events described in the manifest.",
+        "type": "object",
+        "required": [
+          "id",
+          "display"
+        ],
+        "properties": {
+          "id": {
+            "$id": "#/properties/participants/items/properties/id",
+            "type": "string",
+            "minLength": 1,
+            "title": "Participant ID",
+            "description": "Uniquely identifies a participant within the manifest.",
+            "examples": [
+              "P1"
+            ]
+          },
+          "display": {
+            "$id": "#/properties/participants/items/properties/display",
+            "type": "string",
+            "minLength": 1,
+            "title": "Participant display name",
+            "description": "Value used to display the participant.",
+            "examples": [
+              "Keith Kaminski"
+            ]
+          },
+          "email": {
+            "$id": "#/properties/participants/items/properties/email",
+            "type": "string",
+            "format": "idn-email",
+            "title": "Participant email address",
+            "description": "The participant's primary email address.",
+            "examples": [
+              "keith.kaminski@relativity.com",
+              "MKamiński@polar.com"
+            ]
+          },
+          "avatar": {
+            "$id": "#/properties/participants/items/properties/avatar",
+            "type": "string",
+            "title": "Participant avatar image file",
+            "description": "The name of a file within the rsmf.zip, including any extension, that contains an image to display for the avatar for the participant. PNG, JPG, and GIF image formats are supported.",
+            "examples": [
+              "kkaminski.png"
+            ]
+          },
+          "custom": {
+            "$id": "#/properties/participants/items/properties/custom",
+            "type": "array",
+            "title": "Custom participant properties",
+            "description": "An array of name/value objects that can be used to store additional metadata about the participant. You can define any number additional pieces of metadata. Any string, number, or boolean value will be displayed by the Viewer when a user hovers over a participant.",
+            "items": {
+              "$id": "#/properties/participants/items/properties/custom/items",
+              "type": "object",
+              "title": "Custom participant property",
+              "required": [
+                "name",
+                "value"
+              ],
+              "properties": {
+                "name": {
+                  "$id": "#/properties/participants/items/properties/custom/items/properties/name",
+                  "type": "string",
+                  "minLength": 1,
+                  "title": "Custom property name",
+                  "examples": [
+                    "Mobile Number"
+                  ]
+                },
+                "value": {
+                  "$id": "#/properties/participants/items/properties/custom/items/properties/value",
+                  "type": "string",
+                  "minLength": 1,
+                  "title": "Custom property value",
+                  "default": "",
+                  "examples": [
+                    "555-123-4567"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "conversations": {
+      "$id": "#/properties/conversations",
+      "type": "array",
+      "title": "Conversations",
+      "description": "An array of Conversations.",
+      "items": {
+        "$id": "#/properties/conversations/items",
+        "type": "object",
+		"title": "Conversation",
+		"description": "A conversation is a time-bound set of short message events that occur on a specific platform, such as Slack, Bloomberg, or SMS.",
+        "required": [
+          "id",
+          "display",
+          "platform",
+          "type",
+          "participants"
+        ],
+        "properties": {
+          "id": {
+            "$id": "#/properties/conversations/items/properties/id",
+            "type": "string",
+            "minLength": 1,
+            "title": "Conversation ID",
+            "description": "Uniquely identifies a conversation within the manifest.",
+            "examples": [
+              "C1"
+            ]
+          },
+          "display": {
+            "$id": "#/properties/conversations/items/properties/display",
+            "type": "string",
+            "minLength": 1,
+            "title": "Participant display",
+            "description": "Value used to display the conversation.",
+            "examples": [
+              "Keith and Karl"
+            ]
+          },
+          "platform": {
+            "$id": "#/properties/conversations/items/properties/platform",
+            "type": "string",
+            "minLength": 1,
+            "title": "Conversation platform",
+            "description": "The name of the platform from which the conversation originated.",
+            "examples": [
+              "sms",
+              "slack",
+              "bloomberg"
+            ]
+          },
+          "type": {
+            "$id": "#/properties/conversations/items/properties/type",
+            "type": "string",
+            "title": "Conversation type",
+            "description": "Determines the type of the conversation. Valid values are 'direct' and 'channel'. When 'direct', this indicates that the participants do not change during the  conversation. When 'channel', this indicates that participants may enter and leave the conversation at various points in time.",
+            "enum": [
+              "direct",
+              "channel"
+            ],
+            "examples": [
+              "direct"
+            ]
+          },
+          "participants": {
+            "$id": "#/properties/conversations/items/properties/participants",
+            "type": "array",
+            "title": "Conversation participants",
+            "description": "List of participants associated with the conversation. When the type of the associated conversation is 'direct', this list will be all of the participants that took part in the conversation. When the type of the associated conversation is 'channel', this list will be all of the participants who were in the conversation at the time of the earliest event described for that conversation in the manifest.",
+            "items": {
+              "$id": "#/properties/conversations/items/properties/participants/items",
+              "type": "string",
+              "minLength": 1,
+              "title": "Participant ID",
+              "description": "The ID of a participant in the conversation. This must map back to the ID of a Participant identified in the root of the manifest.",
+              "examples": [
+                "P1",
+                "P2"
+              ]
+            }
+          },
+          "custom": {
+            "$id": "#/properties/conversations/items/properties/custom",
+            "type": "array",
+            "title": "Custom conversation properties",
+            "description": "An array of name/value objects that can be used to store additional metadata about the conversation. You can define any number additional pieces of metadata. Any string, number, or boolean value will be displayed by the Viewer when a user hovers over a conversation.",
+            "items": {
+              "$id": "#/properties/conversations/items/properties/custom/items",
+              "type": "object",
+              "title": "Custom conversation property",
+              "required": [
+                "name",
+                "value"
+              ],
+              "properties": {
+                "name": {
+                  "$id": "#/properties/conversations/items/properties/custom/items/properties/name",
+                  "type": "string",
+                  "minLength": 1,
+                  "title": "Custom property name",
+                  "default": "",
+                  "examples": [
+                    "Source"
+                  ]
+                },
+                "value": {
+                  "$id": "#/properties/conversations/items/properties/custom/items/properties/value",
+                  "type": "string",
+                  "minLength": 1,
+                  "title": "Custom property value",
+                  "default": "",
+                  "examples": [
+                    "Keith's iPhone"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "events": {
+      "$id": "#/properties/events",
+      "type": "array",
+      "title": "Events",
+      "description": "An array of short message events.",
+      "items": {
+        "$id": "#/properties/events/items",
+        "type": "object",
+        "title": "Short message event",
+        "description": "An event is any discrete activity that can happen within the confines a conversation.",
+        "required": [
+          "type",
+          "participant",
+          "conversation",
+          "timestamp"
+        ],
+        "properties": {
+          "id": {
+            "$id": "#/properties/events/items/properties/id",
+            "type": "string",
+            "title": "Event ID",
+            "description": "Uniquely identifies an event within a conversation. An event only needs to have an identifier if it is part of a thread.",
+            "examples": [
+              "m1"
+            ]
+          },
+          "type": {
+            "$id": "#/properties/events/items/properties/type",
+            "type": "string",
+            "title": "Event type",
+            "description": "Defines the type of the event.",
+            "enum": [
+              "message",
+              "disclaimer",
+              "join",
+              "leave"
+            ]
+          },
+          "parent": {
+            "$id": "#/properties/events/items/properties/parent",
+            "type": "string",
+            "title": "Event parent ID",
+            "description": "Identifies the parent event of the event. This needs to be set if the event is a message which is a part of a thread. This must map back to the id of another event in the same conversation.",
+            "examples": [
+              "m2"
+            ]
+          },
+          "body": {
+            "$id": "#/properties/events/items/properties/body",
+            "type": "string",
+            "title": "Event body",
+            "description": "Content associated with the event. Not all event types require a body. For a message type, this would be the text of the message.",
+            "default": "",
+            "examples": [
+              "You there?"
+            ]
+          },
+          "participant": {
+            "$id": "#/properties/events/items/properties/participant",
+            "type": "string",
+            "minLength": 1,
+            "title": "Event participant",
+            "description": "The participant that is the source of the event. This must map to the ID of a participant defined in the root of the manifest.",
+            "examples": [
+              "P1"
+            ]
+          },
+          "conversation": {
+            "$id": "#/properties/events/items/properties/conversation",
+            "type": "string",
+            "minLength": 1,
+            "title": "Event conversation",
+            "description": "Identifies the conversation in which the event occurred. This must map back to the id of a conversation defined in the root of the manifest.",
+            "examples": [
+              "C1"
+            ]
+          },
+          "timestamp": {
+            "$id": "#/properties/events/items/properties/timestamp",
+            "type": "string",
+            "title": "Event timestamp",
+            "description": "A value that corresponds to when the event occurred. This must be a date/time value in a format that conforms to the ISO8601 standard.",
+            "format": "date-time",
+            "examples": [
+              "2018-09-11T09:45:00"
+            ]
+          },
+          "deleted": {
+            "$id": "#/properties/events/items/properties/deleted",
+            "type": "boolean",
+            "title": "Event deleted",
+            "description": "Identifies whether an event has been deleted.",
+            "default": false,
+            "examples": [
+              true
+            ]
+          },
+          "importance": {
+            "$id": "#/properties/events/items/properties/importance",
+            "type": "string",
+            "title": "Event importance",
+            "description": "Sets an importance value for the event.",
+            "default": "normal",
+            "enum": [
+              "normal",
+              "high"
+            ]
+          },
+          "reactions": {
+            "$id": "#/properties/events/items/properties/reactions",
+            "type": "array",
+            "title": "Event reactions",
+            "description": "An array of reactions associated with the event.",
+            "items": {
+              "$id": "#/properties/events/items/properties/reactions/items",
+              "type": "object",
+              "title": "Reaction",
+              "required": [
+                "value",
+                "count",
+                "participants"
+              ],
+              "properties": {
+                "value": {
+                  "$id": "#/properties/events/items/properties/reactions/items/properties/value",
+                  "type": "string",
+                  "title": "Reaction value",
+                  "description": "Identifies the reaction. Reactions without visual support will be displayed as text instead. See <url> for a list of supported reactions with visual support.",
+                  "minLength": 1,
+                  "maximum": 30,
+                  "examples": [
+                    "thumbsup"
+                  ]
+                },
+                "count": {
+                  "$id": "#/properties/events/items/properties/reactions/items/properties/count",
+                  "type": "integer",
+                  "title": "Reaction count",
+                  "description": "The number of times this reaction was added to the event.",
+                  "examples": [
+                    1
+                  ]
+                },
+                "participants": {
+                  "$id": "#/properties/events/items/properties/reactions/items/properties/participants",
+                  "type": "array",
+                  "description": "An array of participants who provided the reaction. ",
+                  "title": "Reaction participants",
+                  "items": {
+                    "$id": "#/properties/events/items/properties/reactions/items/properties/participants/items",
+                    "type": "string",
+                    "minLength": 1,
+                    "title": "Participant ID",
+                    "description": "The ID of a participant who provided the reaction. This must map back to the ID of a participant defined in the root of the manifest.",
+                    "examples": [
+                      "P1"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "attachments": {
+            "$id": "#/properties/events/items/properties/attachments",
+            "type": "array",
+            "title": "Event attachments",
+            "description": "An array of attachments associated with the event.",
+            "items": {
+              "$id": "#/properties/events/items/properties/attachments/items",
+              "type": "object",
+              "title": "Event attachment",
+              "required": [
+                "id",
+                "display",
+                "size"
+              ],
+              "properties": {
+                "id": {
+                  "$id": "#/properties/events/items/properties/attachments/items/properties/id",
+                  "type": "string",
+                  "minLength": 1,
+                  "title": "Attachment ID",
+                  "description": "Identifies the attachment. The value should correspond to the name of a file within the rsmf.zip, including any extension.",
+                  "examples": [
+                    "ATT001.PNG"
+                  ]
+                },
+                "display": {
+                  "$id": "#/properties/events/items/properties/attachments/items/properties/display",
+                  "type": "string",
+                  "minLength": 1,
+                  "title": "Attachment display",
+                  "description": "The value to display for the attachment. If the display for the file ends in .png, .jpg, .jpeg, or .gif the system will assume the attachment is an image will attempt to display it inline.",
+                  "examples": [
+                    "partyon.png"
+                  ]
+                },
+                "size": {
+                  "$id": "#/properties/events/items/properties/attachments/items/properties/size",
+                  "type": "integer",
+                  "title": "Attachment file size",
+                  "description": "The size of the file in bytes. This is used for display purposes only.",
+                  "examples": [
+                    123456
+                  ]
+                }
+              }
+            }
+          },
+          "edits": {
+            "$id": "#/properties/events/items/properties/edits",
+            "type": "array",
+            "title": "Event edits",
+            "description": "An array of edits associated with the event.",
+            "items": {
+              "$id": "#/properties/events/items/properties/edits/items",
+              "type": "object",
+              "title": "Event edit",
+              "required": [
+                "participant",
+                "timestamp"
+              ],
+              "properties": {
+                "participant": {
+                  "$id": "#/properties/events/items/properties/edits/items/properties/participant",
+                  "type": "string",
+                  "minLength": 1,
+                  "title": "Participant ID",
+                  "description": "The participant that is the source of the event. This must map to the ID of a participant defined in the root of the manifest.",
+                  "examples": [
+                    "P1"
+                  ]
+                },
+                "timestamp": {
+                  "$id": "#/properties/events/items/properties/edits/items/properties/timestamp",
+				  "type": "string",
+                  "title": "Edit timestamp",
+                  "description": "A value that corresponds to when the edit occurred. This must be a date/time value in a format that conforms to the ISO8601 standard.",
+                  "format": "date-time",
+                  "examples": [
+                    "2018-09-11T09:45:00"
+                  ]
+                }
+              }
+            }
+          },
+          "custom": {
+            "$id": "#/properties/events/items/properties/custom",
+            "type": "array",
+            "title": "Custom event properties",
+			"description": "An array of name/value objects that can be used to store additional metadata about the event. You can define any number additional pieces of metadata. Any string, number, or boolean value will be displayed by the Viewer when a user hovers over an event.",
+            "items": {
+              "$id": "#/properties/events/items/properties/custom/items",
+              "type": "object",
+              "title": "Custom event property",
+              "required": [
+                "name",
+                "value"
+              ],
+              "properties": {
+                "name": {
+                  "$id": "#/properties/events/items/properties/custom/items/properties/name",
+                  "type": "string",
+                  "minLength": 1,
+                  "title": "Custom property name",
+                  "default": "",
+                  "examples": [
+                    "GPS"
+                  ]
+                },
+                "value": {
+                  "$id": "#/properties/events/items/properties/custom/items/properties/value",
+                  "type": "string",
+                  "minLength": 1,
+                  "title": "Custom property value",
+                  "default": "",
+                  "examples": [
+                    "41 24.2028, 2 10.4418"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }    
+  }
+}

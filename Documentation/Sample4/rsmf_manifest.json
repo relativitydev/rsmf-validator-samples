@@ -1,0 +1,30 @@
+{
+    "version": "1.0.0",
+    "participants": [
+        {
+            "id": 1,
+            "display": "Participant Display"            
+        }
+    ],
+    "conversations": [
+        {
+            "display": "C1",
+            "id": "1",
+            "platform": "slack",
+            "type": "channel",
+            "participants": [
+                "2"
+            ]
+        }
+    ],
+    "events": [
+        {
+            "attachment": "avatar.png",
+            "participant": "1",
+            "timestamp": "2013-01-10T15:53:00",
+            "type": "message",
+            "conversation": "1",
+            "body": "Here is an event body"
+        }
+    ]
+}
