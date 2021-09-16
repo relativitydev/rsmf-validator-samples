@@ -12,3 +12,9 @@ To build the sample code, open the RSMFValidatorSampleCode.sln in Visual Studio 
 ## RSMF sample files
 
 A short walkthrough with invalid RSMF sample files is included in the Documentation directory.  See RSMFValidatorSampleCode.pdf.
+
+## RSMF validator application
+
+An RSMF validator application is provided in the 'bin' directory.  It will be used by the examples in RSMFValidatorSampleCode.pdf.  It may also be used to validate RSMF files that are causing issues in production.
+It has a 'Save Error Report' feature that can be used to send information to Relativity support.  Please be advised that the report may contain personal information, so it's best to scrub any PII from the report
+before sending it to Relativity.

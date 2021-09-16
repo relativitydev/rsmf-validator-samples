@@ -1,9 +1,9 @@
 {
   "definitions": {},
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://relativity.com/RSMF/1.0.0/schema.json",
+  "$id": "http://relativity.com/RSMF/2.0.0/schema.json",
   "type": "object",
-  "title": "The 1.0.0 version of the schema for the RSMF manifest file",
+  "title": "The 2.0.0 version of the schema for the RSMF manifest file",
   "required": [
     "version",
     "participants",
@@ -17,9 +17,9 @@
       "minLength": 5,
       "title": "RSMF version",
       "description": "The version of the RSMF specification that the file adheres to.",
-      "default": "1.0.0",
+      "default": "2.0.0",
       "examples": [
-        "1.0.0"
+        "2.0.0"
       ]
     },
     "participants": {
@@ -29,12 +29,11 @@
       "description": "An array of participants.",
       "items": {
         "$id": "#/properties/participants/items",
-		    "title": "Participant",
-		    "description": "A participant is someone who has participated in at least one of the events described in the manifest.",
+        "title": "Participant",
+        "description": "A participant is someone who has participated in at least one of the events described in the manifest.",
         "type": "object",
         "required": [
-          "id",
-          "display"
+          "id"
         ],
         "properties": {
           "id": {
@@ -50,7 +49,6 @@
           "display": {
             "$id": "#/properties/participants/items/properties/display",
             "type": "string",
-            "minLength": 1,
             "title": "Participant display name",
             "description": "Value used to display the participant.",
             "examples": [
@@ -75,6 +73,15 @@
             "description": "The name of a file within the rsmf.zip, including any extension, that contains an image to display for the avatar for the participant. PNG, JPG, and GIF image formats are supported.",
             "examples": [
               "kkaminski.png"
+            ]
+          },
+          "account_id": {
+            "$id": "#/properties/participants/items/properties/account_id",
+            "type": "string",
+            "title": "Participant account ID",
+            "description": "The primary ID that distinguishes the participant in the application.",
+            "examples": [
+              "588-2300"
             ]
           },
           "custom": {
@@ -124,13 +131,11 @@
       "items": {
         "$id": "#/properties/conversations/items",
         "type": "object",
-		"title": "Conversation",
-		"description": "A conversation is a time-bound set of short message events that occur on a specific platform, such as Slack, Bloomberg, or SMS.",
+        "title": "Conversation",
+        "description": "A conversation is a time-bound set of short message events that occur on a specific platform, such as Slack, Bloomberg, or SMS.",
         "required": [
           "id",
-          "display",
           "platform",
-          "type",
           "participants"
         ],
         "properties": {
@@ -147,7 +152,6 @@
           "display": {
             "$id": "#/properties/conversations/items/properties/display",
             "type": "string",
-            "minLength": 1,
             "title": "Participant display",
             "description": "Value used to display the conversation.",
             "examples": [
@@ -196,6 +200,15 @@
               ]
             }
           },
+          "custodian": {
+            "$id": "#/properties/conversations/items/properties/custodian",
+            "type": "string",
+            "title": "Conversation custodian",
+            "description": "The id of a participant who was the source of the conversation. This must map back to one of the participants in the conversation.",
+            "examples": [
+              "P1"
+            ]
+          },
           "custom": {
             "$id": "#/properties/conversations/items/properties/custom",
             "type": "array",
@@ -232,6 +245,15 @@
                 }
               }
             }
+          },
+          "icon": {
+            "$id": "#/properties/conversations/items/properties/icon",
+            "type": "string",
+            "title": "Conversation icon",
+            "description": "The name of a file within the rsmf.zip, including any extension, that contains an image to display for the icon for the conversation. We expect this icon to be the logo for the platform the data was pulled from. ",
+            "examples": [
+              "bloomberg.jpg"
+            ]
           }
         }
       }
@@ -247,10 +269,7 @@
         "title": "Short message event",
         "description": "An event is any discrete activity that can happen within the confines a conversation.",
         "required": [
-          "type",
-          "participant",
-          "conversation",
-          "timestamp"
+          "type"
         ],
         "properties": {
           "id": {
@@ -267,11 +286,14 @@
             "type": "string",
             "title": "Event type",
             "description": "Defines the type of the event.",
+            "minLength": 1,
             "enum": [
               "message",
               "disclaimer",
               "join",
-              "leave"
+              "leave",
+              "history",
+              "unknown"
             ]
           },
           "parent": {
@@ -296,7 +318,6 @@
           "participant": {
             "$id": "#/properties/events/items/properties/participant",
             "type": "string",
-            "minLength": 1,
             "title": "Event participant",
             "description": "The participant that is the source of the event. This must map to the ID of a participant defined in the root of the manifest.",
             "examples": [
@@ -306,7 +327,6 @@
           "conversation": {
             "$id": "#/properties/events/items/properties/conversation",
             "type": "string",
-            "minLength": 1,
             "title": "Event conversation",
             "description": "Identifies the conversation in which the event occurred. This must map back to the id of a conversation defined in the root of the manifest.",
             "examples": [
@@ -354,9 +374,7 @@
               "type": "object",
               "title": "Reaction",
               "required": [
-                "value",
-                "count",
-                "participants"
+                "value"
               ],
               "properties": {
                 "value": {
@@ -408,9 +426,7 @@
               "type": "object",
               "title": "Event attachment",
               "required": [
-                "id",
-                "display",
-                "size"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -426,7 +442,6 @@
                 "display": {
                   "$id": "#/properties/events/items/properties/attachments/items/properties/display",
                   "type": "string",
-                  "minLength": 1,
                   "title": "Attachment display",
                   "description": "The value to display for the attachment. If the display for the file ends in .png, .jpg, .jpeg, or .gif the system will assume the attachment is an image will attempt to display it inline.",
                   "examples": [
@@ -455,8 +470,7 @@
               "type": "object",
               "title": "Event edit",
               "required": [
-                "participant",
-                "timestamp"
+                "participant"
               ],
               "properties": {
                 "participant": {
@@ -471,12 +485,30 @@
                 },
                 "timestamp": {
                   "$id": "#/properties/events/items/properties/edits/items/properties/timestamp",
-				  "type": "string",
+                  "type": "string",
                   "title": "Edit timestamp",
                   "description": "A value that corresponds to when the edit occurred. This must be a date/time value in a format that conforms to the ISO8601 standard.",
                   "format": "date-time",
                   "examples": [
                     "2018-09-11T09:45:00"
+                  ]
+                },
+                "previous": {
+                  "$id": "#/properties/events/items/properties/edits/items/properties/previous",
+                  "type": "string",
+                  "title": "Edit previous",
+                  "description": "The value of the previous body that was changed due to the edit.",
+                  "examples": [
+                    "What is this?"
+                  ]
+                },
+                "new": {
+                  "$id": "#/properties/events/items/properties/edits/items/properties/new",
+                  "type": "string",
+                  "title": "Edit new",
+                  "description": "The value of the new body once the edit was made",
+                  "examples": [
+                    "Looks good!"
                   ]
                 }
               }
@@ -486,7 +518,7 @@
             "$id": "#/properties/events/items/properties/custom",
             "type": "array",
             "title": "Custom event properties",
-			"description": "An array of name/value objects that can be used to store additional metadata about the event. You can define any number additional pieces of metadata. Any string, number, or boolean value will be displayed by the Viewer when a user hovers over an event.",
+            "description": "An array of name/value objects that can be used to store additional metadata about the event. You can define any number additional pieces of metadata. Any string, number, or boolean value will be displayed by the Viewer when a user hovers over an event.",
             "items": {
               "$id": "#/properties/events/items/properties/custom/items",
               "type": "object",
@@ -518,9 +550,80 @@
                 }
               }
             }
+          },
+          "direction": {
+            "$id": "#/properties/events/items/properties/direction",
+            "type": "string",
+            "title": "Event direction",
+            "description": "Helps reviewers understand whose device this information was collected from, relative to the custodian.",
+            "enum": [
+              "incoming",
+              "outgoing"
+            ],
+            "examples": [
+              "incoming"
+            ]
+          },
+          "read_receipts": {
+            "$id": "#/properties/events/items/properties/read_receipts",
+            "type": "array",
+            "title": "Event read receipts",
+            "description": "An array of read receipts associated with the event.",
+            "items": {
+              "$id": "#/properties/events/items/properties/read_receipts/items",
+              "type": "object",
+              "title": "Event read receipt",
+              "required": [
+                "participant"
+              ],
+              "properties": {
+                "participant": {
+                  "$id": "#/properties/events/items/properties/read_receipts/items/properties/participant",
+                  "type": "string",
+                  "minLength": 1,
+                  "title": "Participant ID",
+                  "description": "The participant that made the edit. This must map to the id of a participant defined in the root of the manifest.",
+                  "examples": [
+                    "P1"
+                  ]
+                },
+                "timestamp": {
+                  "$id": "#/properties/events/items/properties/read_receipts/items/properties/timestamp",
+                  "type": "string",
+                  "title": "Read receipt timestamp",
+                  "description": "The timestamp (ISO8601) of when the edit occurred.",
+                  "format": "date-time",
+                  "examples": [
+                    "2018-09-12T12:53:00"
+                  ]
+                },
+                "action": {
+                  "$id": "#/properties/events/items/properties/read_receipts/items/properties/action",
+                  "type": "string",
+                  "title": "Read receipt action",
+                  "description": "If the recipient was delivered the message, and/or read the message.",
+                  "enum": [
+                    "read",
+                    "delivered"
+                  ],
+                  "examples": [
+                    "read"
+                  ]
+                }
+              }
+            }
           }
         }
       }
-    }    
+    },
+    "eventcollectionid": {
+      "$id": "#/properties/eventcollectionid",
+      "type": "string",
+      "title": "RSMF event collection id",
+      "description": "A unique ID that is used to help keep many RSMFs from a single conversation together.",
+      "examples": [
+        "ParentThread_2020"
+      ]
+    }
   }
 }
